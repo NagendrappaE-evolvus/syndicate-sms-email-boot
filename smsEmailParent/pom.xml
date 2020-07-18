@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<groupId>com.evolvus</groupId>
+	<artifactId>smsEmailParent</artifactId>
+	<version>1.1712.02E-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>smsEmailParent</name>
+
+	<scm>
+		<developerConnection>scm:svn:http://codeserver.evolvus.com/source-repository/smsEmailApiWeb/trunk</developerConnection>
+		<connection>scm:svn:http://codeserver.evolvus.com/source-repository/smsEmailApiWeb/trunk</connection>
+		<url>scm:svn:http://codeserver.evolvus.com/source-repository/smsEmailApiWeb/trunk</url>
+	</scm>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+		<oracle.version>14</oracle.version>
+		<spring-boot-starter-mail.vesrion>1.4.3.RELEASE</spring-boot-starter-mail.vesrion>
+		<hikari.version>2.6.0</hikari.version>
+
+	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.3.RELEASE</version>
+	</parent>
+	<modules>
+		<module>../smsEmailWeb</module>
+		<module>../sms</module>
+	</modules>
+	<dependencies>
+		<!-- Spring boot velocity -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-velocity</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+		</dependency>
+
+		<!-- Spring boot velocity -->
+
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<!-- spring boot starter starts -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<!-- spring boot starter ends -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ojdbc</groupId>
+			<artifactId>ojdbc</artifactId>
+			<version>${oracle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<!-- Spring data JPA, default tomcat pool, exclude it -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.tomcat</groupId>
+					<artifactId>tomcat-jdbc</artifactId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>codeserver.evolvus.com</id>
+			<name>codeserver.evolvus.com-snapshots</name>
+			<url>http://www.evolvus.com/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+		<repository>
+			<id>codeserver.evolvus.com</id>
+			<name>codeserver.evolvus.com-releases</name>
+			<url>http://www.evolvus.com/artifactory/libs-release-local</url>
+		</repository>
+	</distributionManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>2.1</version>
+
+				<configuration>
+					<findbugsXmlOutput>true</findbugsXmlOutput>
+					<findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+					<xmlOutput>true</xmlOutput>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-scm-plugin</artifactId> 
+				<version>1.9.5</version> <configuration> <connectionType>developerConnection</connectionType> 
+				</configuration> </plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<remoteTagging>false</remoteTagging>
+					<useReleaseProfile>false</useReleaseProfile>
+				</configuration>
+			</plugin>
+
+
+
+		</plugins>
+	</build>
+
+
+</project>
